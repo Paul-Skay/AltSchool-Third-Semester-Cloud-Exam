@@ -1,12 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sock-shop
+  name: sockshop-ingress
   namespace: sock-shop
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - sockshop.paulskay.me
+    secretName: sock-shop-tls
   rules:
-  - host: sockshop.paulskay.me
+  - host: "sockshop.paulskay.me"
     http:
       paths:
         - pathType: Prefix
@@ -16,66 +20,3 @@ spec:
               name: front-end
               port:
                 number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: carts
-        #       port:
-        #         number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: catalogue
-        #       port:
-        #         number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: orders
-        #       port:
-        #         number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: payment
-        #       port:
-        #         number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: queue-master
-        #       port:
-        #         number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: rabbitmq
-        #       port:
-        #         number: 5672
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: rabbitmq
-        #       port:
-        #         number: 9090
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: shipping
-        #       port:
-        #         number: 80
-        # - path: "/"
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: user
-        #       port:
-        #         number: 80

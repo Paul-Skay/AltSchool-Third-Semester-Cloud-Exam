@@ -17,6 +17,7 @@ spec:
           image: fhsinchy/notes-api
           ports:
             - containerPort: 3000
+          # not putting environment variables directly
           envFrom:
             - configMapRef:
                 name: api-config-map
@@ -26,7 +27,9 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: password
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

@@ -2,24 +2,23 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
-  # annotations:
-  #   kubernetes.io/ingress.class: nginx
-    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   ingressClassName: nginx
   rules:
-    - host: api.apps.paulskay.me
+    - host: api.paulskay.me
     - http:
         paths:
         - pathType: Prefix
-          path: "/"
+          path: "/?(.*)"
           backend:
             service:
               name: client-cluster-ip-service
               port: 
                 number: 8080
         -  pathType: Prefix
-           path: "/api"
+           path: "/api/?(.*)"
            backend:
              service:
               name: api-cluster-ip-service
